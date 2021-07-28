@@ -52,10 +52,25 @@ function draw() {
   
     player.collide(ground);
 
+  }else if(gameState == END){
+  FoodGroup.setVelocityXEach(0);
+  ObstacleGroup.setVelocityXEach(0);
+  backgr.velocityX = 0;
+  if(keyDown('space')){
+    gameState = PLAY;
+    ObstacleGroup.destroyEach();
+    FoodGroup.destroyEach();
+  }
   }
 spawnFood();
 spawnObstacles();
   drawSprites();
+if(gameState == END){
+  text('Space To Restart',380,200)
+}
+  if(player.isTouching(ObstacleGroup)){
+    gameState = END;
+  }
 }
 
 function spawnFood(){
